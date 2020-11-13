@@ -1,5 +1,36 @@
+import Head from 'next/head';
+import { SWRConfig } from 'swr';
+import { ThemeProvider } from 'styled-components';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import fetchBase from '../utils/fetch';
+import GlobalStyle from '../styles/GlobalStyle';
+import theme from '../styles/theme';
+import 'fontsource-roboto';
+
 const MyApp = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Head>
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
+
+      <SWRConfig
+        value={{
+          fetcher: (resource, init) =>
+            fetchBase(resource, init).then((res) => res.json()),
+        }}
+      >
+        <GlobalStyle />
+
+        <ThemeProvider theme={theme}>
+          <Navbar />
+          <Component {...pageProps} />
+          <Footer />
+        </ThemeProvider>
+      </SWRConfig>
+    </>
+  );
 };
 
 export default MyApp;

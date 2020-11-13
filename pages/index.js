@@ -1,18 +1,17 @@
 import Head from 'next/head';
 
-const Index = () => {
+const NewBooks = () => {
   return (
-    <div>
+    <>
       <Head>
-        <title>Home Page</title>
-        <link rel='icon' href='/favicon.ico' />
+        <title>It Books</title>
       </Head>
 
-      <main>
-        <h1>Hello Next JS</h1>
+      <main className='container content'>
+        <h1>Hello To IT Books</h1>
       </main>
-    </div>
+    </>
   );
 };
 
-export default Index;
+export default NewBooks;
