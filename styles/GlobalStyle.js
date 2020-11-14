@@ -36,6 +36,7 @@ const GlobalStyle = createGlobalStyle`
 
   .content {
     flex: 1 0 auto;
+    margin: 48px auto;
   }
 
   .footer {

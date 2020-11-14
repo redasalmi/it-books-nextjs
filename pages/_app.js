@@ -27,7 +27,11 @@ const MyApp = ({ Component, pageProps }) => {
         <ThemeProvider theme={theme}>
           <Navbar />
           <Welcome />
-          <Component {...pageProps} />
+
+          <main className='container content'>
+            <Component {...pageProps} />
+          </main>
+
           <Footer />
         </ThemeProvider>
       </SWRConfig>

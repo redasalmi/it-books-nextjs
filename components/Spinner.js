@@ -1,10 +1,14 @@
 import StyledSpinner from '../styles/Spinner.style';
 
-const Spinner = () => (
+const Spinner = ({ textMessage }) => (
   <StyledSpinner>
-    <div />
-    <div />
-    <div />
+    <div className='spinner'>
+      <div />
+      <div />
+      <div />
+    </div>
+
+    <h2 className='textMessage'>{textMessage}</h2>
   </StyledSpinner>
 );
 
