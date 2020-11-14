@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { SWRConfig } from 'swr';
 import { ThemeProvider } from 'styled-components';
 import Navbar from '../components/Navbar';
+import Welcome from '../components/Welcome';
 import Footer from '../components/Footer';
 import fetchBase from '../utils/fetch';
 import GlobalStyle from '../styles/GlobalStyle';
@@ -25,6 +26,7 @@ const MyApp = ({ Component, pageProps }) => {
 
         <ThemeProvider theme={theme}>
           <Navbar />
+          <Welcome />
           <Component {...pageProps} />
           <Footer />
         </ThemeProvider>
