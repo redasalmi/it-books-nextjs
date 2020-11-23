@@ -1,22 +1,22 @@
 import Head from 'next/head';
 import useSWR from 'swr';
+import BooksList from '../components/books/List';
 import Error from '../components/Error';
 import Spinner from '../components/Spinner';
 
 const NewBooks = () => {
   const { data, error } = useSWR('/new');
-  console.log(data);
 
   if (error) return <Error />;
-  if (!data) return <Spinner textMessage='Loading latest books...' />;
+  if (!data) return <Spinner textMessage='Loading New Released Books...' />;
 
   return (
     <>
       <Head>
-        <title>It Books</title>
+        <title>It Books - New Released Books</title>
       </Head>
 
-      <h1>Hello To IT Books</h1>
+      <BooksList books={data.books} />
     </>
   );
 };

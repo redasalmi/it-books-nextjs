@@ -2,6 +2,7 @@ const theme = {
   navbarBg: '#343a40',
   welcomeBg: '#c8c8c8',
   white: '#ffffff',
+  black: '#000000',
   orange: '#e68f2c',
   red: '#dc3545',
   darkRed: '#da0c20',
