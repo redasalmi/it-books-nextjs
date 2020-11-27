@@ -20,7 +20,6 @@ const GlobalStyle = createGlobalStyle`
     height: 100%
   }
   
-  
   body {
     font-family: Roboto;
 
@@ -78,7 +77,6 @@ const GlobalStyle = createGlobalStyle`
       max-width: 1140px;
     }
   }
-
 `;
 
 export default GlobalStyle;

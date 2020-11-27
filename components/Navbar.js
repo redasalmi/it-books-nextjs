@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import StyledNavbar from '../styles/Navbar.style';
 import SearchIcon from '../assets/svg/search.svg';
@@ -6,6 +6,12 @@ import SearchIcon from '../assets/svg/search.svg';
 const Navbar = () => {
   const router = useRouter();
   const [search, setSearch] = useState(router.query.search ?? '');
+
+  useEffect(() => {
+    if (router.pathname === '/') {
+      setSearch('');
+    }
+  }, [router]);
 
   const handleSearchChange = (event) => setSearch(event.target.value);
 
