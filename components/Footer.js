@@ -18,7 +18,7 @@ const Footer = () => (
       <a
         target='_blank'
         rel='noreferrer noopener'
-        href='https://github.com/redasalmi/it-books'
+        href='https://github.com/redasalmi/it-books-nextjs'
       >
         <GithubIcon />
       </a>

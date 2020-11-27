@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import StyledBooksList from '../../styles/BooksList';
+import StyledBooksList from '../../styles/BooksList.style';
 
 const BooksList = ({ books }) => (
   <StyledBooksList>
