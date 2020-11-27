@@ -1,15 +1,19 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import StyledNavbar from '../styles/Navbar.style';
 import SearchIcon from '../assets/svg/search.svg';
 
 const Navbar = () => {
-  const [search, setSearch] = useState('');
+  const router = useRouter();
+  const [search, setSearch] = useState(router.query.search ?? '');
 
   const handleSearchChange = (event) => setSearch(event.target.value);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(search);
+    if (search) {
+      router.push(`/book/${search}/1`);
+    }
   };
 
   return (
