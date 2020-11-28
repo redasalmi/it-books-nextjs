@@ -6,7 +6,7 @@ const scale = keyframes`
     opacity: 1;
   }
 
-  from {
+  to {
     transform: scale(0.5);
     opacity: 0.5;
   }
