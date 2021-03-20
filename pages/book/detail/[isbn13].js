@@ -11,13 +11,15 @@ const BookDetail = ({ book }) => {
   const { isbn13 } = query;
 
   const { data, error } = useSWR(`/books/${isbn13}`, { initialData: book });
+  const { title, desc } = data;
 
   if (error) return <Error />;
 
   return (
     <>
       <Head>
-        <title>IT Books - {data.title}</title>
+        <meta name='description' content={desc} />
+        <title>IT Books - {title}</title>
       </Head>
 
       <Detail book={data} />

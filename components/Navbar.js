@@ -37,7 +37,7 @@ const Navbar = () => {
             placeholder='Search books by title, author, ISBN'
           />
 
-          <button type='submit'>
+          <button type='submit' aria-label='search books'>
             <SearchIcon className='search-icon' />
           </button>
         </form>

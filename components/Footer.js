@@ -18,6 +18,7 @@ const Footer = () => (
       <a
         target='_blank'
         rel='noreferrer noopener'
+        aria-label='itbooks github repository'
         href='https://github.com/redasalmi/it-books-nextjs'
       >
         <GithubIcon />

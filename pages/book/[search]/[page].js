@@ -30,6 +30,7 @@ const BookSearch = ({ booksInit }) => {
   return (
     <>
       <Head>
+        <meta name='description' content={`${search} books search result`} />
         <title>IT Books - {search} books</title>
       </Head>
 

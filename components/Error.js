@@ -1,4 +1,4 @@
-import StyledError from '../styles/Error.style.';
+import StyledError from '../styles/Error.style';
 
 const Error = () => (
   <StyledError className='container'>

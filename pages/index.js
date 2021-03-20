@@ -13,6 +13,10 @@ const NewBooks = ({ books }) => {
   return (
     <>
       <Head>
+        <meta
+          name='description'
+          content='Website for IT, Programming and Computer Science Books'
+        />
         <title>It Books - New Released Books</title>
       </Head>
 
