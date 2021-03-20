@@ -1,18 +1,23 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
+
 import Pagination from 'react-js-pagination';
 import BooksList from '../../../components/books/List';
 import Error from '../../../components/Error';
-import Spinner from '../../../components/Spinner';
 import StyledPagination from '../../../styles/Pagination.style';
+import { fetchBooks } from '../../../utils/fetcher';
 
-const BookSearch = ({ search, page }) => {
+const BookSearch = ({ booksInit }) => {
   const router = useRouter();
-  const { data, error } = useSWR(`/search/${search}/${page}`);
+  const { query } = router;
+  const { search, page } = query;
+
+  const { data, error } = useSWR(`/search/${search}/${page}`, {
+    initialData: booksInit,
+  });
 
   if (error) return <Error />;
-  if (!data) return <Spinner textMessage='Loading Search Result...' />;
 
   const { total, books } = data;
   const booksTotal = parseInt(total, 10);
@@ -53,11 +58,14 @@ const BookSearch = ({ search, page }) => {
   );
 };
 
-export async function getServerSideProps({ query }) {
-  const { search, page } = query;
+export async function getServerSideProps({ params }) {
+  const { search, page } = params;
+
+  const resp = await fetchBooks(`/search/${search}/${page}`);
+  const booksInit = await resp.json();
 
   return {
-    props: { search, page },
+    props: { booksInit },
   };
 }
 

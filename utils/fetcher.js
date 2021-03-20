@@ -1,4 +1,4 @@
-const fetchBase = (resource, init) => {
+export const fetcher = (resource, init) => {
   // proxy to skip cors error
   const corsUrl = 'https://cors-server-proxy.herokuapp.com/';
   // api base url
@@ -8,4 +8,13 @@ const fetchBase = (resource, init) => {
   return fetch(baseUrl + resource, init);
 };
 
-export default fetchBase;
+export const fetchBooks = (resource) => {
+  const init = {
+    headers: {
+      origin: '*',
+      'Content-Type': 'application/json',
+    },
+  };
+
+  return fetcher(resource, init);
+};

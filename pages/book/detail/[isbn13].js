@@ -1,14 +1,18 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import useSWR from 'swr';
-import Error from '../../../components/Error';
-import Spinner from '../../../components/Spinner';
-import Detail from '../../../components/books/Detail';
 
-const BookDetail = ({ isbn13 }) => {
-  const { data, error } = useSWR(`/books/${isbn13}`);
+import Error from '../../../components/Error';
+import Detail from '../../../components/books/Detail';
+import { fetchBooks } from '../../../utils/fetcher';
+
+const BookDetail = ({ book }) => {
+  const { query } = useRouter();
+  const { isbn13 } = query;
+
+  const { data, error } = useSWR(`/books/${isbn13}`, { initialData: book });
 
   if (error) return <Error />;
-  if (!data) return <Spinner textMessage='Loading Book Detail...' />;
 
   return (
     <>
@@ -21,11 +25,14 @@ const BookDetail = ({ isbn13 }) => {
   );
 };
 
-export async function getServerSideProps({ query }) {
-  const { isbn13 } = query;
+export async function getServerSideProps({ params }) {
+  const { isbn13 } = params;
+
+  const resp = await fetchBooks(`/books/${isbn13}`);
+  const book = await resp.json();
 
   return {
-    props: { isbn13 },
+    props: { book },
   };
 }
 

@@ -1,14 +1,14 @@
 import Head from 'next/head';
 import useSWR from 'swr';
-import BooksList from '../components/books/List';
-import Error from '../components/Error';
-import Spinner from '../components/Spinner';
 
-const NewBooks = () => {
-  const { data, error } = useSWR('/new');
+import Error from '../components/Error';
+import BooksList from '../components/books/List';
+import { fetchBooks } from '../utils/fetcher';
+
+const NewBooks = ({ books }) => {
+  const { data, error } = useSWR('/new', { initialData: books });
 
   if (error) return <Error />;
-  if (!data) return <Spinner textMessage='Loading New Released Books...' />;
 
   return (
     <>
@@ -20,5 +20,14 @@ const NewBooks = () => {
     </>
   );
 };
+
+export async function getStaticProps() {
+  const resp = await fetchBooks('/new');
+  const books = await resp.json();
+
+  return {
+    props: { books },
+  };
+}
 
 export default NewBooks;

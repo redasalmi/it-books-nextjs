@@ -1,10 +1,12 @@
 import Head from 'next/head';
 import { SWRConfig } from 'swr';
 import { ThemeProvider } from 'styled-components';
+
 import Navbar from '../components/Navbar';
 import Welcome from '../components/Welcome';
 import Footer from '../components/Footer';
-import fetchBase from '../utils/fetch';
+import { fetcher } from '../utils/fetcher';
+
 import GlobalStyle from '../styles/GlobalStyle';
 import theme from '../styles/theme';
 import 'fontsource-roboto';
@@ -19,7 +21,7 @@ const MyApp = ({ Component, pageProps }) => {
       <SWRConfig
         value={{
           fetcher: (resource, init) =>
-            fetchBase(resource, init).then((res) => res.json()),
+            fetcher(resource, init).then((res) => res.json()),
         }}
       >
         <GlobalStyle />
