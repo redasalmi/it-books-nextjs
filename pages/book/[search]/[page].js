@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-
 import Pagination from 'react-js-pagination';
+
 import BooksList from '../../../components/books/List';
 import Error from '../../../components/Error';
 import StyledPagination from '../../../styles/Pagination.style';
@@ -25,6 +25,13 @@ const BookSearch = ({ booksInit }) => {
 
   const handlePageChange = (selectedPage) => {
     router.push(`/book/${search}/${selectedPage}`);
+
+    const main = document.querySelector('.container');
+    main.scrollIntoView({
+      block: 'start',
+      inline: 'nearest',
+      behavior: 'smooth',
+    });
   };
 
   return (
