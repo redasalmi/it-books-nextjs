@@ -1,7 +1,12 @@
+const path = require('path');
 const svgToMiniDataURI = require('mini-svg-data-uri');
 
 module.exports = {
   reactStrictMode: true,
+
+  sassOptions: {
+    includePaths: [path.join(__dirname, 'styles')],
+  },
 
   images: {
     domains: ['itbook.store'],

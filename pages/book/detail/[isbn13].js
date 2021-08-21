@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
 import Error from '../../../components/Error';
-import Detail from '../../../components/books/Detail';
+import Detail from '../../../components/Books/Detail';
+
 import { fetchBooks } from '../../../utils/fetcher';
 
 const BookDetail = ({ book }) => {

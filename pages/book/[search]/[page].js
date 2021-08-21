@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
-import Pagination from 'react-js-pagination';
 
-import BooksList from '../../../components/books/List';
+import BooksList from '../../../components/Books/List';
+import Pagination from '../../../components/Pagination';
 import Error from '../../../components/Error';
-import StyledPagination from '../../../styles/Pagination.style';
+
 import { fetchBooks } from '../../../utils/fetcher';
 
 const BookSearch = ({ booksInit }) => {
@@ -45,17 +45,12 @@ const BookSearch = ({ booksInit }) => {
         <>
           <BooksList books={books} />
 
-          <StyledPagination>
-            <Pagination
-              activePage={parseInt(page)}
-              itemsCountPerPage={booksPerPage}
-              totalItemsCount={booksTotal}
-              onChange={handlePageChange}
-              itemClass='page-item'
-              linkClass='page-link'
-              activeLinkClass=''
-            />
-          </StyledPagination>
+          <Pagination
+            activePage={parseInt(page)}
+            itemsCountPerPage={booksPerPage}
+            totalItemsCount={booksTotal}
+            handlePageChange={handlePageChange}
+          />
         </>
       ) : (
         <div>

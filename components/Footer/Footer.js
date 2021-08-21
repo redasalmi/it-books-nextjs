@@ -1,9 +1,9 @@
-import StyledFooter from '../styles/Footer.style';
-import GithubIcon from '../assets/svg/github.svg?component';
+import GithubIcon from '../../assets/svg/github.svg?component';
+import styles from './Footer.module.scss';
 
 const Footer = () => (
-  <StyledFooter className='footer'>
-    <div className='container'>
+  <footer className={`footer ${styles.footer}`}>
+    <div className={`container ${styles.content}`}>
       <p>
         All of these books and information are brought to you by the{' '}
         <a
@@ -24,7 +24,7 @@ const Footer = () => (
         <GithubIcon />
       </a>
     </div>
-  </StyledFooter>
+  </footer>
 );
 
 export default Footer;

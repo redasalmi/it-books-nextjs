@@ -1,15 +1,13 @@
 import Head from 'next/head';
 import { SWRConfig } from 'swr';
-import { ThemeProvider } from 'styled-components';
 
 import Navbar from '../components/Navbar';
 import Welcome from '../components/Welcome';
 import Footer from '../components/Footer';
-import { fetcher } from '../utils/fetcher';
 
-import GlobalStyle from '../styles/GlobalStyle';
-import theme from '../styles/theme';
+import { fetcher } from '../utils/fetcher';
 import 'fontsource-roboto';
+import '../styles/index.scss';
 
 const MyApp = ({ Component, pageProps }) => {
   return (
@@ -24,18 +22,14 @@ const MyApp = ({ Component, pageProps }) => {
             fetcher(resource, init).then((res) => res.json()),
         }}
       >
-        <GlobalStyle />
+        <Navbar />
+        <Welcome />
 
-        <ThemeProvider theme={theme}>
-          <Navbar />
-          <Welcome />
+        <main className='container content'>
+          <Component {...pageProps} />
+        </main>
 
-          <main className='container content'>
-            <Component {...pageProps} />
-          </main>
-
-          <Footer />
-        </ThemeProvider>
+        <Footer />
       </SWRConfig>
     </>
   );

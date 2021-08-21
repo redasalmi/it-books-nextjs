@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import StyledNavbar from '../styles/Navbar.style';
-import SearchIcon from '../assets/svg/search.svg?component';
+
+import SearchIcon from '../../assets/svg/search.svg?component';
+import styles from './Navbar.module.scss';
 
 const Navbar = () => {
   const router = useRouter();
@@ -24,15 +25,15 @@ const Navbar = () => {
   };
 
   return (
-    <StyledNavbar>
-      <div className='container navbar-container'>
-        <div className='navbar-logo'>
+    <nav className={styles.navbar}>
+      <div className={`container ${styles.container}`}>
+        <div className={styles.logo}>
           <Link href='/'>
             <a>IT Books</a>
           </Link>
         </div>
 
-        <form onSubmit={handleSubmit} className='navbar-form'>
+        <form onSubmit={handleSubmit} className={styles.form}>
           <input
             type='text'
             value={search}
@@ -41,11 +42,11 @@ const Navbar = () => {
           />
 
           <button type='submit' aria-label='search books'>
-            <SearchIcon className='search-icon' />
+            <SearchIcon className={styles.searchIcon} />
           </button>
         </form>
       </div>
-    </StyledNavbar>
+    </nav>
   );
 };
 

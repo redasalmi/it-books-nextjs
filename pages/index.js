@@ -2,7 +2,8 @@ import Head from 'next/head';
 import useSWR from 'swr';
 
 import Error from '../components/Error';
-import BooksList from '../components/books/List';
+import BooksList from '../components/Books/List';
+
 import { fetchBooks } from '../utils/fetcher';
 
 const NewBooks = ({ books }) => {
@@ -25,7 +26,7 @@ const NewBooks = ({ books }) => {
   );
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const resp = await fetchBooks('/new');
   const books = await resp.json();
 

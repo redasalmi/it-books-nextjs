@@ -1,14 +1,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import StyledBooksList from '../../styles/BooksList.style';
+
+import styles from './List.module.scss';
 
 const BooksList = ({ books }) => (
-  <StyledBooksList>
+  <div className={styles.list}>
     {books.map((book) => {
       const { title, image, isbn13 } = book;
 
       return (
-        <div className='book-card' key={isbn13}>
+        <div className={styles.book} key={isbn13}>
           <Link href={`/book/detail/${isbn13}`}>
             <a>
               <Image
@@ -24,7 +25,7 @@ const BooksList = ({ books }) => (
         </div>
       );
     })}
-  </StyledBooksList>
+  </div>
 );
 
 export default BooksList;
