@@ -1,5 +1,5 @@
 import StyledFooter from '../styles/Footer.style';
-import GithubIcon from '../assets/svg/github.svg';
+import GithubIcon from '../assets/svg/github.svg?component';
 
 const Footer = () => (
   <StyledFooter className='footer'>

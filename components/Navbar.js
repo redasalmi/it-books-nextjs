@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import StyledNavbar from '../styles/Navbar.style';
-import SearchIcon from '../assets/svg/search.svg';
+import SearchIcon from '../assets/svg/search.svg?component';
 
 const Navbar = () => {
   const router = useRouter();
