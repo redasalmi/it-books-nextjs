@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import StyledNavbar from '../styles/Navbar.style';
 import SearchIcon from '../assets/svg/search.svg';
@@ -26,7 +27,9 @@ const Navbar = () => {
     <StyledNavbar>
       <div className='container navbar-container'>
         <div className='navbar-logo'>
-          <a href='/'>IT Books</a>
+          <Link href='/'>
+            <a>IT Books</a>
+          </Link>
         </div>
 
         <form onSubmit={handleSubmit} className='navbar-form'>
