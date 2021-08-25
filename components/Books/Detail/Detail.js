@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
+import blurData from '../../../utils/blurData';
 import styles from './Detail.module.scss';
 
 const BookDetail = ({ book }) => {
@@ -40,6 +41,9 @@ const BookDetail = ({ book }) => {
             width={210}
             height={245}
             layout='responsive'
+            loading='lazy'
+            placeholder='blur'
+            blurDataURL={blurData(210, 245)}
           />
 
           <div>

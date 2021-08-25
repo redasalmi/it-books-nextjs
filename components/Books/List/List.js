@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
+import blurData from '../../../utils/blurData';
 import styles from './List.module.scss';
 
 const BooksList = ({ books }) => (
@@ -18,6 +19,9 @@ const BooksList = ({ books }) => (
                 width={210}
                 height={245}
                 layout='responsive'
+                loading='lazy'
+                placeholder='blur'
+                blurDataURL={blurData(210, 245)}
               />
               <p>{title}</p>
             </a>
