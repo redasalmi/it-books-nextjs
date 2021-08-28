@@ -6,29 +6,25 @@ import styles from './List.module.scss';
 
 const BooksList = ({ books }) => (
   <div className={styles.list}>
-    {books.map((book) => {
-      const { title, image, isbn13 } = book;
-
-      return (
-        <div className={styles.book} key={isbn13}>
-          <Link href={`/book/detail/${isbn13}`}>
-            <a>
-              <Image
-                src={image}
-                alt={title}
-                width={210}
-                height={245}
-                layout='responsive'
-                loading='lazy'
-                placeholder='blur'
-                blurDataURL={blurData(210, 245)}
-              />
-              <p>{title}</p>
-            </a>
-          </Link>
-        </div>
-      );
-    })}
+    {books.map(({ title, image, isbn13 }) => (
+      <div className={styles.book} key={isbn13}>
+        <Link href={`/book/detail/${isbn13}`}>
+          <a>
+            <Image
+              src={image}
+              alt={title}
+              width={210}
+              height={245}
+              layout='responsive'
+              loading='lazy'
+              placeholder='blur'
+              blurDataURL={blurData(210, 245)}
+            />
+            <p>{title}</p>
+          </a>
+        </Link>
+      </div>
+    ))}
   </div>
 );
 

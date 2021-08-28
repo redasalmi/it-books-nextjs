@@ -7,7 +7,6 @@ import Navbar from '../components/Navbar';
 import Welcome from '../components/Welcome';
 import Footer from '../components/Footer';
 
-import 'fontsource-roboto';
 import '../styles/index.scss';
 
 const MyApp = ({ Component, pageProps }) => {
