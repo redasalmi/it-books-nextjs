@@ -1,17 +1,24 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
+import { QueryClient, useQuery } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
 
 import Error from '../../../components/Error';
 import Detail from '../../../components/Books/Detail';
 
-import { fetchBooks } from '../../../utils/fetcher';
+import fetchBooks from '../../../utils/fetchBooks';
 
-const BookDetail = ({ book }) => {
+const BookDetail = () => {
   const { query } = useRouter();
   const { isbn13 } = query;
 
-  const { data, error } = useSWR(`/books/${isbn13}`, { initialData: book });
+  const { data, error } = useQuery(
+    ['book', isbn13],
+    async () => fetchBooks(`/books/${isbn13}`),
+    {
+      enabled: false,
+    },
+  );
   const { title, desc } = data;
 
   if (error) return <Error />;
@@ -31,11 +38,15 @@ const BookDetail = ({ book }) => {
 export async function getServerSideProps({ params }) {
   const { isbn13 } = params;
 
-  const resp = await fetchBooks(`/books/${isbn13}`);
-  const book = await resp.json();
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(['book', isbn13], async () =>
+    fetchBooks(`/books/${isbn13}`),
+  );
 
   return {
-    props: { book },
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
   };
 }
 

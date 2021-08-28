@@ -1,13 +1,16 @@
 import Head from 'next/head';
-import useSWR from 'swr';
+import { QueryClient, useQuery } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
 
 import Error from '../components/Error';
 import BooksList from '../components/Books/List';
 
-import { fetchBooks } from '../utils/fetcher';
+import fetchBooks from '../utils/fetchBooks';
 
-const NewBooks = ({ books }) => {
-  const { data, error } = useSWR('/new', { initialData: books });
+const NewBooks = () => {
+  const { data, error } = useQuery('newBooks', async () => fetchBooks('/new'), {
+    enabled: false,
+  });
 
   if (error) return <Error />;
 
@@ -27,11 +30,13 @@ const NewBooks = ({ books }) => {
 };
 
 export async function getServerSideProps() {
-  const resp = await fetchBooks('/new');
-  const books = await resp.json();
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery('newBooks', async () => fetchBooks('/new'));
 
   return {
-    props: { books },
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
   };
 }
 

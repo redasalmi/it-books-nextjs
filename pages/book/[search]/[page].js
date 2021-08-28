@@ -1,21 +1,26 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
+import { QueryClient, useQuery } from 'react-query';
+import { dehydrate } from 'react-query/hydration';
 
 import BooksList from '../../../components/Books/List';
 import Pagination from '../../../components/Pagination';
 import Error from '../../../components/Error';
 
-import { fetchBooks } from '../../../utils/fetcher';
+import fetchBooks from '../../../utils/fetchBooks';
 
-const BookSearch = ({ booksInit }) => {
+const BookSearch = () => {
   const router = useRouter();
   const { query } = router;
   const { search, page } = query;
 
-  const { data, error } = useSWR(`/search/${search}/${page}`, {
-    initialData: booksInit,
-  });
+  const { data, error } = useQuery(
+    ['search', search, page],
+    async () => fetchBooks(`/search/${search}/${page}`),
+    {
+      enabled: false,
+    },
+  );
 
   if (error) return <Error />;
 
@@ -64,11 +69,15 @@ const BookSearch = ({ booksInit }) => {
 export async function getServerSideProps({ params }) {
   const { search, page } = params;
 
-  const resp = await fetchBooks(`/search/${search}/${page}`);
-  const booksInit = await resp.json();
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(['search', search, page], async () =>
+    fetchBooks(`/search/${search}/${page}`),
+  );
 
   return {
-    props: { booksInit },
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
   };
 }
 
