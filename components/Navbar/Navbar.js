@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import SearchIcon from '../../assets/svg/search.svg?component';
+import SearchIcon from '../../assets/svg/search.svg';
 import styles from './Navbar.module.scss';
 
 const Navbar = () => {

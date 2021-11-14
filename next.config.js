@@ -4,7 +4,6 @@ const svgToMiniDataURI = require('mini-svg-data-uri');
 module.exports = {
   reactStrictMode: true,
   swcMinify: true,
-  target: 'serverless',
 
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
@@ -17,31 +16,16 @@ module.exports = {
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/,
-      oneOf: [
+      use: [
         {
-          resourceQuery: /dataUri/, // foo.svg?dataUri
-          type: 'asset/inline',
-          generator: {
-            dataUrl: (content) => {
-              content = content.toString();
-              return svgToMiniDataURI(content);
-            },
-          },
-        },
-        {
-          resourceQuery: /component/, // foo.svg?component
-          use: [
-            {
-              loader: '@svgr/webpack',
-              options: {
-                svgoConfig: {
-                  plugins: {
-                    removeViewBox: false,
-                  },
-                },
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: {
+                removeViewBox: false,
               },
             },
-          ],
+          },
         },
       ],
     });
