@@ -8,7 +8,7 @@ const BooksList = ({ books }) => (
   <div className={styles.list}>
     {books.map(({ title, image, isbn13 }) => (
       <div className={styles.book} key={isbn13}>
-        <Link href={`/book/detail/${isbn13}`}>
+        <Link href={`/book/${isbn13}`}>
           <a>
             <Image
               src={image}

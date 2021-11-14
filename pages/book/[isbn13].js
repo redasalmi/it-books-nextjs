@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { QueryClient, useQuery } from 'react-query';
 import { dehydrate } from 'react-query/hydration';
 
-import Error from '../../../components/Error';
-import Detail from '../../../components/Books/Detail';
+import Error from '../../components/Error';
+import Detail from '../../components/Books/Detail';
 
-import fetchBooks from '../../../utils/fetchBooks';
+import fetchBooks from '../../utils/fetchBooks';
 
 const BookDetail = () => {
   const { query } = useRouter();
