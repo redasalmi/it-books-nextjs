@@ -1,5 +1,4 @@
 const path = require('path');
-const svgToMiniDataURI = require('mini-svg-data-uri');
 
 module.exports = {
   reactStrictMode: true,
