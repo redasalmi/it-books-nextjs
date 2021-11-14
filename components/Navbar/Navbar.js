@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -7,20 +7,14 @@ import styles from './Navbar.module.scss';
 
 const Navbar = () => {
   const router = useRouter();
-  const [search, setSearch] = useState(router.query.search ?? '');
-
-  useEffect(() => {
-    if (router.pathname === '/') {
-      setSearch('');
-    }
-  }, [router]);
+  const [search, setSearch] = useState(router?.query?.search ?? '');
 
   const handleSearchChange = (event) => setSearch(event.target.value);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (search) {
-      router.push(`/book/${search}/1`);
+      router.push(`/?search=${search}&page=1`);
     }
   };
 
