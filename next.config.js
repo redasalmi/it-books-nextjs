@@ -3,7 +3,7 @@ const svgToMiniDataURI = require('mini-svg-data-uri');
 
 module.exports = {
   reactStrictMode: true,
-  target: 'serverless',
+  swcMinify: true,
 
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
