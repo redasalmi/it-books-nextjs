@@ -9,7 +9,7 @@ const Navbar = () => {
   const router = useRouter();
   const initSearch = router?.query?.search;
 
-  const [search, setSearch] = useState(initSearch ?? '');
+  const [search, setSearch] = useState(initSearch || '');
 
   useEffect(() => {
     if (router.pathname === '/' && !initSearch) {
