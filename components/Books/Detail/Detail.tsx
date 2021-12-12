@@ -3,8 +3,13 @@ import Image from 'next/image';
 
 import blurData from '../../../utils/blurData';
 import styles from './Detail.module.scss';
+import { BookData } from '../../../types/book';
 
-const BookDetail = ({ book }) => {
+interface BookDetailProps {
+  book: BookData;
+}
+
+const BookDetail = ({ book }: BookDetailProps) => {
   const {
     title,
     image,
