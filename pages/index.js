@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { QueryClient, useQuery } from 'react-query';
-import { dehydrate } from 'react-query/hydration';
+import useSWR from 'swr';
 
 import Error from '../components/Error';
 import BooksList from '../components/Books/List';
@@ -14,21 +13,14 @@ const NewBooks = () => {
   const { search, page } = router.query;
   const hasSearched = !!(search && search?.length > 0);
 
-  const { data: newBooksData, error: newBooksError } = useQuery(
-    'newBooks',
-    async () => fetchBooks('/new'),
-    { enabled: false },
-  );
-
-  const { data: searchBooksData, error: searchBooksError } = useQuery(
-    ['search', search, page],
-    async () => fetchBooks(`/search/${search}/${page}`),
-    { enabled: false },
+  const { data: newBooks, error: newBooksError } = useSWR('/new');
+  const { data: searchedBooks, error: searchBooksError } = useSWR(
+    `/search/${search}/${page}`,
   );
 
   if (newBooksError || searchBooksError) return <Error />;
 
-  const { books, total } = hasSearched ? searchBooksData : newBooksData;
+  const { books, total } = hasSearched ? searchedBooks : newBooks;
 
   const handlePageChange = (selectedPage) => {
     router.push(`/?search=${search}&page=${selectedPage}`);
@@ -75,19 +67,18 @@ export async function getServerSideProps({ query }) {
   const { search, page } = query;
   const hasSearched = !!(search && search?.length > 0);
 
-  const queryClient = new QueryClient();
+  const newBooksResource = '/new';
+  const newBooks = !hasSearched ? await fetchBooks(newBooksResource) : [];
 
-  if (!hasSearched) {
-    await queryClient.prefetchQuery('newBooks', async () => fetchBooks('/new'));
-  } else {
-    await queryClient.prefetchQuery(['search', search, page], async () =>
-      fetchBooks(`/search/${search}/${page}`),
-    );
-  }
+  const searchResource = `/search/${search}/${page}`;
+  const searchedBooks = hasSearched ? await fetchBooks(searchResource) : [];
 
   return {
     props: {
-      dehydratedState: dehydrate(queryClient),
+      fallback: {
+        [newBooksResource]: newBooks,
+        [searchResource]: searchedBooks,
+      },
     },
   };
 }

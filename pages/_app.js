@@ -1,37 +1,37 @@
-import { useState } from 'react';
 import Head from 'next/head';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { Hydrate } from 'react-query/hydration';
+import { SWRConfig } from 'swr';
 
 import Navbar from '../components/Navbar';
 import Welcome from '../components/Welcome';
 import Footer from '../components/Footer';
 
+import fetchBooks from '../utils/fetchBooks';
 import '../styles/index.scss';
 
-const MyApp = ({ Component, pageProps }) => {
-  const [queryClient] = useState(() => new QueryClient());
+const MyApp = ({ Component, pageProps }) => (
+  <>
+    <Head>
+      <link rel='icon' href='/favicon.ico' />
+    </Head>
 
-  return (
-    <>
-      <Head>
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
-
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <Navbar />
-          <Welcome />
-
-          <main className='container content'>
-            <Component {...pageProps} />
-          </main>
-
-          <Footer />
-        </Hydrate>
-      </QueryClientProvider>
-    </>
-  );
-};
+    <SWRConfig
+      value={{
+        refreshInterval: 0,
+        fetcher: fetchBooks,
+        revalidateIfStale: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+        fallback: pageProps?.fallback,
+      }}
+    >
+      <Navbar />
+      <Welcome />
+      <main className='container content'>
+        <Component {...pageProps} />
+      </main>
+      <Footer />
+    </SWRConfig>
+  </>
+);
 
 export default MyApp;
