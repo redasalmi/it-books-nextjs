@@ -3,8 +3,13 @@ import Image from 'next/image';
 
 import blurData from '../../../utils/blurData';
 import styles from './List.module.scss';
+import type { Book } from '../../../types/book';
 
-const BooksList = ({ books }) => (
+interface BooksListProps {
+  books: Book[];
+}
+
+const BooksList = ({ books }: BooksListProps) => (
   <div className={styles.list}>
     {books.map(({ title, image, isbn13 }) => (
       <div className={styles.book} key={isbn13}>

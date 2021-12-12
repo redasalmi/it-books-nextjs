@@ -1,28 +1,30 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
+import { GetServerSideProps } from 'next';
 
 import Error from '../components/Error';
 import BooksList from '../components/Books/List';
 import Pagination from '../components/Pagination';
 
 import fetchBooks from '../utils/fetchBooks';
+import type { BooksData } from '../types/book';
 
 const NewBooks = () => {
   const router = useRouter();
   const { search, page } = router.query;
   const hasSearched = !!(search && search?.length > 0);
 
-  const { data: newBooks, error: newBooksError } = useSWR('/new');
-  const { data: searchedBooks, error: searchBooksError } = useSWR(
+  const { data: newBooks, error: newBooksError } = useSWR<BooksData>('/new');
+  const { data: searchedBooks, error: searchBooksError } = useSWR<BooksData>(
     `/search/${search}/${page}`,
   );
 
   if (newBooksError || searchBooksError) return <Error />;
 
-  const { books, total } = hasSearched ? searchedBooks : newBooks;
+  const { books, total } = hasSearched ? searchedBooks! : newBooks!;
 
-  const handlePageChange = (selectedPage) => {
+  const handlePageChange = (selectedPage: number) => {
     router.push(`/?search=${search}&page=${selectedPage}`);
     document.body.scrollIntoView({
       block: 'start',
@@ -47,7 +49,7 @@ const NewBooks = () => {
 
           {hasSearched ? (
             <Pagination
-              activePage={parseInt(page, 10)}
+              activePage={parseInt(`${page}`, 10)}
               itemsCountPerPage={10}
               totalItemsCount={parseInt(total, 10)}
               handlePageChange={handlePageChange}
@@ -63,15 +65,19 @@ const NewBooks = () => {
   );
 };
 
-export async function getServerSideProps({ query }) {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { search, page } = query;
   const hasSearched = !!(search && search?.length > 0);
 
   const newBooksResource = '/new';
-  const newBooks = !hasSearched ? await fetchBooks(newBooksResource) : [];
+  const newBooks: BooksData | [] = !hasSearched
+    ? await fetchBooks(newBooksResource)
+    : [];
 
   const searchResource = `/search/${search}/${page}`;
-  const searchedBooks = hasSearched ? await fetchBooks(searchResource) : [];
+  const searchedBooks: BooksData | [] = hasSearched
+    ? await fetchBooks(searchResource)
+    : [];
 
   return {
     props: {
@@ -81,6 +87,6 @@ export async function getServerSideProps({ query }) {
       },
     },
   };
-}
+};
 
 export default NewBooks;

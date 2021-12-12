@@ -32,7 +32,7 @@ const BookDetail = () => {
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { isbn13 } = params!;
   const resource = `/books/${isbn13}`;
-  const book = await fetchBooks(resource);
+  const book: BookData = await fetchBooks(resource);
 
   return {
     props: {
