@@ -1,30 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# It Books (Next.js version)
 
-## Getting Started
+A website to browse for IT, Programming and Computer Science Books. found at: [https://itbooks-next.netlify.app](https://itbooks-next.netlify.app/).
 
-First, run the development server:
+## Other versions
 
-```bash
-npm run dev
-# or
-yarn dev
+This website exists in multiple versions which you can find here:
+
+- [It Books (CRA version)](https://github.com/redasalmi/it-books) found at [https://itbooks.netlify.app](https://itbooks.netlify.app/).
+
+- [It Books (Next.js version)](https://github.com/redasalmi/it-books-nextjs) found at [https://itbooks-next.netlify.app](https://itbooks-next.netlify.app/).
+
+- [It Books (Remix version)](https://github.com/redasalmi/it-books-remix) found at [https://itbooks-remix.netlify.app](https://itbooks-remix.netlify.app/).
+
+## Built With
+
+- React
+- SWR for data fetching
+- IT Bookstore API to fetch data found at: [https://api.itbook.store/](https://api.itbook.store/)
+
+## Cloning & Installation
+
+To clone this project and start it, open a terminal and follow this steps:
+
+```
+	git clone https://github.com/redasalmi/it-books-nextjs.git
+	cd it-books-nextjs
+	yarn install
+	yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**Note:**
+`yarn install` will install all the dependencies needed to run the project on your machine. `yarn dev` will start a development server on your localhost.
