@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import blurData from '../../../utils/blurData';
-import styles from './List.module.scss';
-import type { Book } from '../../../types/book';
+import blurData from '~/utils/blurData';
+import styles from '~/styles/components/books-list.module.scss';
+import type { Book } from '~/types/book';
 
 interface BooksListProps {
   books: Book[];

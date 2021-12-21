@@ -3,12 +3,12 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import { GetServerSideProps } from 'next';
 
-import Error from '../components/Error';
-import BooksList from '../components/Books/List';
-import Pagination from '../components/Pagination';
+import Error from '~/components/Error';
+import BooksList from '~/components/BooksList';
+import Pagination from '~/components/Pagination';
 
-import fetchBooks from '../utils/fetchBooks';
-import type { BooksData } from '../types/book';
+import fetchBooks from '~/utils/fetchBooks';
+import type { BooksData } from '~/types/book';
 
 const NewBooks = () => {
   const router = useRouter();

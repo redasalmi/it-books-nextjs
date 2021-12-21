@@ -2,8 +2,8 @@ import * as React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import SearchIcon from '../../assets/svg/search.svg';
-import styles from './Navbar.module.scss';
+import SearchIcon from '~/assets/svg/search.svg';
+import styles from '~/styles/components/navbar.module.scss';
 
 const Navbar = () => {
   const router = useRouter();

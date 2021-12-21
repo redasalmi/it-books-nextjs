@@ -3,11 +3,11 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr';
 import { GetServerSideProps } from 'next';
 
-import Error from '../../components/Error';
-import Detail from '../../components/Books/Detail';
+import Error from '~/components/Error';
+import Detail from '~/components/BookDetail';
 
-import fetchBooks from '../../utils/fetchBooks';
-import type { BookData } from '../../types/book';
+import fetchBooks from '~/utils/fetchBooks';
+import type { BookData } from '~/types/book';
 
 const BookDetail = () => {
   const { query } = useRouter();

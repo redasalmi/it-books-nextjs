@@ -2,14 +2,14 @@ import Head from 'next/head';
 import { SWRConfig } from 'swr';
 import type { AppProps } from 'next/app';
 
-import Navbar from '../components/Navbar';
-import Welcome from '../components/Welcome';
-import Footer from '../components/Footer';
+import Navbar from '~/components/Navbar';
+import Welcome from '~/components/Welcome';
+import Footer from '~/components/Footer';
 
-import fetchBooks from '../utils/fetchBooks';
+import fetchBooks from '~/utils/fetchBooks';
 import '@fontsource/poppins/400.css';
 import '@fontsource/poppins/700.css';
-import '../styles/index.scss';
+import '~/styles/index.scss';
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <>

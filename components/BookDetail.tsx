@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import blurData from '../../../utils/blurData';
-import styles from './Detail.module.scss';
-import { BookData } from '../../../types/book';
+import blurData from '~/utils/blurData';
+import styles from '~/styles/components/book-detail.module.scss';
+import type { BookData } from '~/types/book';
 
 interface BookDetailProps {
   book: BookData;
