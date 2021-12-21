@@ -16,7 +16,7 @@ This website exists in multiple versions which you can find here:
 
 - React
 - SWR for data fetching
-- IT Bookstore API to fetch data found at: [https://api.itbook.store/](https://api.itbook.store/)
+- IT Bookstore API to fetch data found at: [https://api.itbook.store](https://api.itbook.store/)
 
 ## Cloning & Installation
 
